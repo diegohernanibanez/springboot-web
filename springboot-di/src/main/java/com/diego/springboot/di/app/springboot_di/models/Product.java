@@ -1,6 +1,6 @@
 package com.diego.springboot.di.app.springboot_di.models;
 
-public class Product {
+public class Product implements Cloneable{
 
     private Long id;
     private String name;
@@ -39,4 +39,13 @@ public class Product {
         this.price = price;
     }
 
+    @Override
+    @SuppressWarnings("CloneDeclaresCloneNotSupported")
+    public Object clone(){
+        try {
+            return super.clone();
+        } catch (CloneNotSupportedException ex) {
+            return new Product(id, name, price);
+        }
+    }
 }
