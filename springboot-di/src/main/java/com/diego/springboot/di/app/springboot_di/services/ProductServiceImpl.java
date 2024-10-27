@@ -23,7 +23,7 @@ public class ProductServiceImpl implements ProductService{
     @Override
     public List<Product> findAll(){
         return repository.findAll().stream().map(p -> {
-            Double priceTax = p.getPrice() * environment.getProperty("config.price.tax", Double.class);
+            Double priceTax = p.getPrice() * environment.getProperty("config.price.tax", Double.class, 1d);
             Product newProd = (Product) p.clone();
             newProd.setPrice(priceTax.longValue());
             return newProd;
