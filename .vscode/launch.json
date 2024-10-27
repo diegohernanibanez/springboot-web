@@ -9,6 +9,16 @@
             "projectName": "springboot-di",
             "args": "",
             "envFile": "${workspaceFolder}/.env"
+        },
+        {
+            "type": "java",
+            "name": "Spring Boot-SpringbootDifacturaApplication<springboot-difactura>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "mainClass": "com.diego.curso.springboot.di.factura.springboot_difactura.SpringbootDifacturaApplication",
+            "projectName": "springboot-difactura",
+            "args": "",
+            "envFile": "${workspaceFolder}/.env"
         }
     ]
 }
