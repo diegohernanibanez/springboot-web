@@ -2,8 +2,11 @@ package com.diego.curso.springboot.di.factura.springboot_difactura.models;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
+import org.springframework.web.context.annotation.RequestScope;
 
 @Component
+@RequestScope
+// @JsonIgnoreProperties({"targetSource", "advisors"})
 public class Client {
 
     @Value("${client.name}")
@@ -25,5 +28,9 @@ public class Client {
 
     public void setLastname(String lastname) {
         this.lastname = lastname;
+    }
+
+    public String getFullName() {
+        return name.concat(" ").concat(lastname);
     }
 }

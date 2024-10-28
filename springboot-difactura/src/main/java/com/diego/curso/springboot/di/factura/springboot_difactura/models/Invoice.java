@@ -5,8 +5,14 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
+import org.springframework.web.context.annotation.RequestScope;
+
+import jakarta.annotation.PostConstruct;
+import jakarta.annotation.PreDestroy;
 
 @Component
+@RequestScope
+// @JsonIgnoreProperties({"targetSource", "advisors"})
 public class Invoice {
 
     @Autowired
@@ -17,6 +23,17 @@ public class Invoice {
 
     @Autowired
     private List<Item> items;
+
+    @PostConstruct
+    public void init() {
+        System.out.println("Creando el componente de la factura");
+        description = description.concat(" del cliente: ").concat(client.getFullName());
+    }
+
+    @PreDestroy
+    public void destroy() {
+        System.out.println("Destruyendo el beam factura");
+    }
 
     public Client getClient() {
         return client;
@@ -48,9 +65,8 @@ public class Invoice {
         // for(Item item : items){
         //     total += item.getTotal();
         // }
-
         return items.stream()
-            .map(item -> item.getAmount())
-            .reduce((long) 0 ,(sum, amount) -> sum + amount);
+                .map(item -> item.getAmount())
+                .reduce((long) 0, (sum, amount) -> sum + amount);
     }
 }
